@@ -10,8 +10,7 @@ class Transaction:
         if not name or amount <= 0 or price <= 0:
             return "Invalid input data."
         self.items[name] = {"amount": amount, "price": price}
-        print(self.items)
-        return f"Item {name} added successfully."
+        return f"Curent Items: {self.items} \nItem {name} added successfully."
     
     def update_item_name(self, old_name: str, new_name: str):
         if old_name in self.items:
@@ -40,8 +39,7 @@ class Transaction:
     def delete_item(self, name: str):
         if name in self.items:
             del self.items[name]
-            print(f"Item {name} deleted successfully.")
-            print(self.items)
+            return f"Item {name} deleted successfully. \nCurrent Items: {self.items}"
         else:
             return f"Item {name} not found."
     
@@ -65,10 +63,13 @@ class Transaction:
             total = details["amount"] * details["price"]
             table.append([name, details["amount"], details["price"], total])
 
-        print("The order is correct")
-        return tabulate(table, headers=["Item Name", "Amount", "Price/Item", "Total Price"], tablefmt="grid")
-        
-
+        rendered_table = tabulate(
+            table, 
+            headers=["Item Name", "Amount", "Price/Item", "Total Price"], 
+            tablefmt="grid"
+        )
+        return f"The order is correct. Here are the details:\n{rendered_table}"
+                
     def total_price(self):
         total = 0
         for details in self.items.values():
@@ -85,4 +86,4 @@ class Transaction:
             discount = 0.0
             
         final_price = int(total * (1 - discount))
-        return f"Total price: {total}, Discount: {int(discount*100)}%, Final price: {final_price}"
+        print(f"Total price: {total}, Discount: {int(discount*100)}%, Final price: {final_price}")
