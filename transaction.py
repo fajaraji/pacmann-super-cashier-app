@@ -10,7 +10,7 @@ class Transaction:
         if not name or amount <= 0 or price <= 0:
             return "Invalid input data."
         self.items[name] = {"amount": amount, "price": price}
-        return f"Curent Items: {self.items} \nItem {name} added successfully."
+        return f"Current Items: {self.items} \nItem {name} added successfully."
     
     def update_item_name(self, old_name: str, new_name: str):
         if old_name in self.items:
@@ -86,4 +86,4 @@ class Transaction:
             discount = 0.0
             
         final_price = int(total * (1 - discount))
-        print(f"Total price: {total}, Discount: {int(discount*100)}%, Final price: {final_price}")
+        return f"Total price: {total}, Discount: {int(discount*100)}%, Final price: {final_price}"
